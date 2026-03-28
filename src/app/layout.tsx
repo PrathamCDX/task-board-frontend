@@ -29,10 +29,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <Providers>
+      <body className="h-full">
         <ToastContainer position="top-right" autoClose={3000} />
-        <body className="h-full">{children}</body>
-      </Providers>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
