@@ -1,10 +1,14 @@
 "use client";
+import { useSelector } from "react-redux";
 
 import LogInForm from "@/components/LoginForm/loginForm";
 import TripleDotLoader from "@/components/TripleDotLoader/TripleDotLoader";
 import { Suspense } from "react";
 
 export default function LoginPage() {
+  const user = useSelector((state: any) => state.setUser.user);
+
+  console.log("Redux user:", user);
   return (
     <div className="font-poppins h-full w-full bg-white text-black">
       <div className="flex h-full w-full items-center justify-center p-2">

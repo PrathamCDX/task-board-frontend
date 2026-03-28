@@ -10,6 +10,7 @@ import { SignUpFormSchema } from "@/schema/SignUpFormValues";
 import { SignupFormValues } from "@/types/SignUpFormValues";
 import { redirect } from "next/navigation";
 import useSignUp from "@/utils/useSignUp";
+import { useRouter } from "next/navigation";
 
 type formValues = z.infer<typeof SignUpFormSchema>;
 
@@ -20,13 +21,11 @@ const SignUpForm = () => {
     resolver: zodResolver(SignUpFormSchema),
   });
 
-  const { mutate, isSuccess, isPending } = useSignUp();
+  const { mutate, isPending } = useSignUp();
+  const router = useRouter();
 
   const onSubmit = (data: formValues): void => {
     mutate(data);
-    if (isSuccess) {
-      redirect("/dashboard");
-    }
   };
 
   return (

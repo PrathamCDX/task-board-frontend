@@ -9,6 +9,7 @@ import Button from "../Button/Button";
 import { LoginFormValues } from "@/types/LoginFormValues";
 import { redirect } from "next/navigation";
 import useLogin from "@/utils/useLogin";
+import { useRouter } from "next/navigation";
 
 type formValues = z.infer<typeof LogInFormSchema>;
 
@@ -19,13 +20,12 @@ const LoginForm = () => {
     resolver: zodResolver(LogInFormSchema),
   });
 
-  const { mutate, isSuccess, isPending } = useLogin();
+  const router = useRouter();
+
+  const { mutate, isPending } = useLogin();
 
   const onSubmit = (data: formValues): void => {
     mutate(data);
-    if (isSuccess) {
-      redirect("/dashboard");
-    }
   };
 
   return (
