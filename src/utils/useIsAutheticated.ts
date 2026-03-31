@@ -1,3 +1,5 @@
+"use client";
+
 import { userServiceApi } from "@/lib/axios.config";
 import { useQuery } from "@tanstack/react-query";
 import { setUser } from "@/lib/reduxSlices/setUser";
@@ -26,5 +28,7 @@ export const useIsAuthenticated = ()  => {
   return useQuery({
     queryKey: ["authStatus"],
     queryFn: checkAuthStatus,
+    retry: false, 
+    enabled: !!localStorage.getItem("jwtToken")
 });
 };
