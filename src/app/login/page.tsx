@@ -2,12 +2,20 @@
 
 import LogInForm from "@/components/LoginForm/loginForm";
 import TripleDotLoader from "@/components/TripleDotLoader/TripleDotLoader";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store.config";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const user = useSelector((state: RootState) => state.userDetails.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/");
+    }
+  }, [user, router]);
 
   return (
     <div className="font-poppins h-full w-full bg-white text-black">
